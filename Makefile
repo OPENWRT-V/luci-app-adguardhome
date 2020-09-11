@@ -43,13 +43,13 @@ define Package/luci-app-adguardhome/install
 	cp -pR ./luasrc/* $(1)/usr/lib/lua/luci
 	$(INSTALL_DIR) $(1)/
 	cp -pR ./root/* $(1)/
+	$(INSTALL_BIN) ./root/etc/init.d/AdGuardHome $(1)/etc/init.d/AdGuardHome
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/i18n
 	po2lmo ./po/zh-cn/AdGuardHome.po $(1)/usr/lib/lua/luci/i18n/AdGuardHome.zh-cn.lmo
 endef
 
 define Package/luci-app-adguardhome/postinst
 #!/bin/sh
-	chmod 755 /etc/init.d/AdGuardHome >/dev/null 2>&1
 	/etc/init.d/AdGuardHome enable >/dev/null 2>&1
 	enable=$(uci get AdGuardHome.AdGuardHome.enabled 2>/dev/null)
 	if [ "$enable" == "1" ]; then
