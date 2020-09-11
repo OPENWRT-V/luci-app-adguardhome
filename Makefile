@@ -46,6 +46,8 @@ define Package/luci-app-adguardhome/install
 	$(INSTALL_BIN) ./root/etc/init.d/AdGuardHome $(1)/etc/init.d/AdGuardHome
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/i18n
 	po2lmo ./po/zh-cn/AdGuardHome.po $(1)/usr/lib/lua/luci/i18n/AdGuardHome.zh-cn.lmo
+	$(INSTALL_DIR) $(1)/usr/bin/AdGuardHome
+	$(INSTALL_BIN) ./files/bin/$(ARCH)/AdGuardHome $(1)/usr/bin/AdGuardHome/AdGuardHome
 endef
 
 define Package/luci-app-adguardhome/postinst
